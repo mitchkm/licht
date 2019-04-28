@@ -30,13 +30,12 @@ func _process(delta):
 		self.position = get_global_mouse_position()
 		self.position.x = 32 + (64*(int(self.position.x)/64))
 		self.position.y = 32 + (64*(int(self.position.y)/64))
-		self.z_index = self.position.y
+		
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
 		self.get_node("CollideBox").rotate(PI/2)
 		currentText += 1
 		currentText = currentText%4
 		sprite.texture = textures[currentText]
-		sprite.position = Vector2(sprite.position.x*(((currentText%2))), sprite.position.y*((-(currentText%2))))
 		
 func _draw():
 	if lp > 0:

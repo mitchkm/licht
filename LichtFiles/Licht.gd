@@ -12,6 +12,7 @@ var space
 var old_collide
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.position.y = self.get_viewport().size.y/2
 	skelies = 200
 	la = lazer.position.angle_to(lazer.cast_to)
 	

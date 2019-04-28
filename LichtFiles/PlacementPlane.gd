@@ -8,7 +8,7 @@ var placing = false
 func placePeice():
 	var placement = load("res://Placeable.tscn").instance()
 	placement.position = get_global_mouse_position()
-	placement.position.x = 32 + (64*(int(placement.position.x)/64))
+	placement.position.x = 64 + (128*(int(placement.position.x)/128))
 	placement.position.y = 32 + (64*(int(placement.position.y)/64))
 	add_child(placement)
 func _ready():
@@ -27,7 +27,7 @@ func _process(delta):
 			placePeice()
 			placing = true;
 		
-	elif(Input.is_action_just_pressed("mouse_click") && placing):
+	elif(Input.is_action_just_pressed("mouse_click") && get_global_mouse_position().x && placing):
 		placing = false
 		
 

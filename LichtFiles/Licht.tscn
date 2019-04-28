@@ -20,7 +20,9 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Lazer" type="RayCast2D" parent="."]
+visible = false
 enabled = true
 cast_to = Vector2( 1000, 0 )
 collision_mask = 6
 collide_with_areas = true
+
