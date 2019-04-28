@@ -13,4 +13,3 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Board"]
 position = Vector2( 510, 310 )
 shape = SubResource( 1 )
-

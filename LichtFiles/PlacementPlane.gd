@@ -29,3 +29,5 @@ func _process(delta):
 		
 	elif(Input.is_action_just_pressed("mouse_click") && placing):
 		placing = false
+		
+
