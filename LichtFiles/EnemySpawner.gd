@@ -19,7 +19,6 @@ func _process(delta):
 		newEnemy.position = Vector2(1000, (spot*128)+128)
 		var scene = get_parent()
 		if(scene):
-			print_debug("Spawn")
 			scene.add_child(newEnemy)
 		refresh = 0
 		
