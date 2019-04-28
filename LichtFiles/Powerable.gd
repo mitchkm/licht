@@ -13,7 +13,6 @@ func powered():
 	return self.lp > 0
 
 func lazer_on(power, angle, collision_point):
-	print_debug(angle)
 	self.lp = power
 	self.la = angle
 	self.collision_point = collision_point
