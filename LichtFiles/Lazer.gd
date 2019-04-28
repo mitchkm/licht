@@ -38,7 +38,7 @@ func lazer_call(collider, event, point = null):
 		return
 	var powerable = collider.get_node("Powerable")
 	if powerable:
-		powerable.call(event, lp, la, point)
+		powerable.call(event, lp, la, color, point)
 
 func draw_lzr():
 	drawLazer.width = lp

@@ -15,7 +15,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Lazer" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
 enabled = false
 
 [node name="Powerable" parent="." instance=ExtResource( 4 )]
-
