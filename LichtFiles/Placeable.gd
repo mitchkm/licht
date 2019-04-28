@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
 # Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var lazer = get_node("Lazer")
+onready var powerable = get_node("Powerable")
+var lazer_effect = preload("res://lazer_end_effect.tscn")
 var clicked = false
 var timer = 0
-var lazer_effect = preload("res://lazer_end_effect.tscn")
-onready var powerable = get_node("Powerable")
 var efct
 var placed = false
 var currentText = 0
@@ -19,7 +18,8 @@ var textures =  \
 func _ready():
 	self.get_node("Sprite").texture = textures[currentText]
 	efct = lazer_effect.instance()
-	self.get_parent().add_child(efct)
+	efct.set_emitting(false);
+	self.add_child(efct)
 	efct.scale *= 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,24 +28,40 @@ func _process(delta):
 	var sprite = self.get_node("Sprite")
 	if(Input.is_mouse_button_pressed(1)):
 		placed = true
+		powerable.set_disabled(false)
 	elif(!placed):	
 		var mouse_pos = get_parent().get_local_mouse_position()
 		self.position = mouse_pos
 		self.position.x = 128*((int(self.position.x))/128)
 		self.position.y = 64*(int(self.position.y)/64)
 		self.z_index = self.position.y+1
-		powerable.set_disabled(false)
+		powerable.set_disabled(true)
 		
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
-		self.get_node("Powerable").rotate(PI/2)
+		self.powerable.rotate(PI/2)	
 		currentText += 1
 		currentText = currentText%4
 		sprite.texture = textures[currentText]
 		
 func _physics_process(delta):
-	efct.position = powerable.collision_point
-	efct.set_emitting(powerable.lp > 0)
-		
-func _draw():
-	if powerable.lp > 0:
-		draw_line(Vector2(), Vector2(1000, 0).rotated(powerable.la + PI/2 - currentText%2 * PI), Color(255, 255, 255), powerable.lp)
+	if powerable.powered() and not lazer.enabled:
+		efct.position = self.to_local(powerable.collision_point)
+		efct.set_emitting(true)
+		lazer.position = self.to_local(powerable.collision_point)
+		var angle = powerable.la + PI/2 * get_flip()
+		lazer.la = angle
+		lazer.snap_angle()
+		lazer.lp = powerable.lp
+		lazer.calc_cast_to()
+		lazer.enabled = true
+		lazer.get_node("DrawLazer").visible = true
+	elif not powerable.powered():
+		lazer.enabled = false
+		lazer.get_node("DrawLazer").visible = false
+		efct.set_emitting(false)
+	
+func get_flip():
+	if currentText == 1:
+		return -1
+	else:
+		return 1

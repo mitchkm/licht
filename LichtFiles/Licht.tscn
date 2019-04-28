@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://LICHT.gd" type="Script" id=1]
+<<<<<<< HEAD
 [ext_resource path="res://licht.png" type="Texture" id=2]
 [ext_resource path="res://Lazer.gd" type="Script" id=3]
 [ext_resource path="res://DrawLazer.tscn" type="PackedScene" id=4]
+=======
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Lazer.tscn" type="PackedScene" id=3]
+>>>>>>> 458b1661d428f6bae435b22775069af976ef5996
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.8743, 32.1761 )
@@ -29,3 +34,4 @@ script = ExtResource( 3 )
 
 [node name="DrawLazer" parent="Lazer" instance=ExtResource( 4 )]
 
+[node name="Lazer" parent="." instance=ExtResource( 3 )]
