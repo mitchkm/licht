@@ -6,9 +6,8 @@ extends KinematicBody2D
 var clicked = false
 var timer = 0
 var lazer_effect = preload("res://lazer_end_effect.tscn")
+onready var powerable = get_node("Powerable")
 var efct
-var lp = 0
-var la
 var placed = false
 var currentText = 0
 var textures =  \
@@ -18,7 +17,10 @@ var textures =  \
  load("res://normSkelieDR.png")]
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	 self.get_node("Sprite").texture = textures[currentText]# Replace with function body.
+	self.get_node("Sprite").texture = textures[currentText]
+	efct = lazer_effect.instance()
+	self.get_parent().add_child(efct)
+	efct.scale *= 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,7 +28,8 @@ func _process(delta):
 	var sprite = self.get_node("Sprite")
 	if(Input.is_mouse_button_pressed(1)):
 		placed = true
-	elif(!placed):	
+		powerable.set_disabled(false)
+	elif(!placed):
 		self.position = get_global_mouse_position()
 		self.position.x = 32 + (64*(int(self.position.x)/64))
 		self.position.y = 32 + (64*(int(self.position.y)/64))
@@ -37,21 +40,10 @@ func _process(delta):
 		currentText = currentText%4
 		sprite.texture = textures[currentText]
 		
+func _physics_process(delta):
+	efct.position = powerable.collision_point
+	efct.set_emitting(powerable.lp > 0)
+		
 func _draw():
-	if lp > 0:
-		draw_line(Vector2(), Vector2(1000, 0).rotated(la + PI/2 - currentText%2 * PI), Color(255, 255, 255), lp)
-
-func lazer_on(power, angle):
-	print_debug(angle)
-	lp = power
-	la = angle
-	efct = lazer_effect.instance()	
-	add_child(efct)
-	efct.scale *= 2
-	efct.set_emitting(true)
-	
-func lazer_off(power, angle):
-	lp = 0
-	if efct:
-		efct.free()
-		efct = null
+	if powerable.lp > 0:
+		draw_line(Vector2(), Vector2(1000, 0).rotated(powerable.la + PI/2 - currentText%2 * PI), Color(255, 255, 255), powerable.lp)

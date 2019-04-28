@@ -6,7 +6,7 @@ var lp = 8
 var color = Color(1, 1, 1)
 var la = 0
 var default_target
-var old_collide
+var cur_collider
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,22 +15,27 @@ func _ready():
 
 func _physics_process(delta):
 	#update()
-	if self.is_colliding() and (not old_collide or old_collide.name != self.get_collider().name):
-		if old_collide:
-			old_collide.call("lazer_off", lp, la)
-		old_collide = self.get_collider()
-		old_collide.call("lazer_on", lp, la)
+	if self.is_colliding() and (not cur_collider or cur_collider.name != self.get_collider().name):
+		lazer_call(cur_collider, "lazer_off")
+		cur_collider = self.get_collider()
+		lazer_call(cur_collider, "lazer_on", self.get_collision_point())
 	elif not self.is_colliding():
-		if old_collide:
-			old_collide.call("lazer_off", lp, la)
-		old_collide = null
-	draw_Lzr()
+		lazer_call(cur_collider, "lazer_off")
+		cur_collider = null
+	draw_lzr()
 
-func draw_Lzr():
+func lazer_call(collider, event, point = null):
+	if not collider:
+		return
+	var powerable = collider.get_node("Powerable")
+	if powerable:
+		powerable.call(event, lp, la, point)
+
+func draw_lzr():
 	drawLazer.width = lp
 	drawLazer.color = color
-	if old_collide:
-		drawLazer.target = old_collide.position -  self.get_parent().position
+	if cur_collider:
+		drawLazer.target = cur_collider.position -  self.get_parent().position
 		drawLazer.target.y += self.position.y
 		drawLazer.target.x += self.position.x
 	else:
