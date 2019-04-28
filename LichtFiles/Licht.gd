@@ -10,6 +10,7 @@ func _ready():
 	self.position.y = self.get_viewport().size.y/2
 	skelies = 200
 	lazer.color = Color(0.8, 0.1, 0.8, 0.8) # purple
+	lazer.lp = self.lp
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

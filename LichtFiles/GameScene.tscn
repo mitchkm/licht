@@ -16,4 +16,3 @@ position = Vector2( 96, 288 )
 [node name="Placement" parent="." instance=ExtResource( 3 )]
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 4 )]
-

@@ -2,7 +2,7 @@ extends RayCast2D
 
 # Declare member variables here. Examples:
 onready var drawLazer = get_node("DrawLazer")
-var lp = 8
+var lp = 1
 var color = Color(1, 1, 1)
 var la = 0
 var default_target
@@ -10,8 +10,14 @@ var cur_collider
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	la = self.position.angle_to(self.cast_to)
-	default_target = self.cast_to - self.position
+	self.default_target = self.cast_to - self.position
+
+func calc_cast_to():
+	self.cast_to = default_target.rotated(self.la)
+	self.cast_to += self.position
+
+func snap_angle():
+	self.la = floor(self.la / (PI/4)) * PI/4
 
 func _physics_process(delta):
 	#update()
@@ -35,8 +41,6 @@ func draw_lzr():
 	drawLazer.width = lp
 	drawLazer.color = color
 	if cur_collider:
-		drawLazer.target = cur_collider.position -  self.get_parent().position
-		drawLazer.target.y += self.position.y
-		drawLazer.target.x += self.position.x
+		drawLazer.target = self.to_local(self.get_collision_point())
 	else:
-		drawLazer.target = default_target
+		drawLazer.target = self.cast_to - self.position
