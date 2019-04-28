@@ -27,9 +27,10 @@ func _process(delta):
 	if(Input.is_mouse_button_pressed(1)):
 		placed = true
 	elif(!placed):	
-		self.position = get_global_mouse_position()
-		self.position.x = 32 + (64*(int(self.position.x)/64))
-		self.position.y = 32 + (64*(int(self.position.y)/64))
+		self.position = get_parent().get_local_mouse_position()
+		self.position.x = -64 + (128*(int(self.position.x)/128))
+		self.position.y =  (64*(int(self.position.y)/64))
+		self.z_index = self.position.y+1
 		
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
 		self.get_node("CollideBox").rotate(PI/2)

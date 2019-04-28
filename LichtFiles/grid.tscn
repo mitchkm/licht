@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://grid.png" type="Texture" id=1]
+[ext_resource path="res://grid.gd" type="Script" id=2]
+
+[node name="grid" type="Sprite"]
+scale = Vector2( 0.67, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 32 )
+script = ExtResource( 2 )
+

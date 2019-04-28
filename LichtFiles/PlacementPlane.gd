@@ -7,12 +7,14 @@ var placing = false
 # Called when the node enters the scene tree for the first time.
 func placePeice():
 	var placement = load("res://Placeable.tscn").instance()
-	placement.position = get_global_mouse_position()
+	placement.position = get_local_mouse_position()
 	placement.position.x = 64 + (128*(int(placement.position.x)/128))
 	placement.position.y = 32 + (64*(int(placement.position.y)/64))
 	add_child(placement)
 func _ready():
-	pass # Replace with function body.
+	self.position = self.get_viewport().size/float(2)
+	self.z_index = self.position.y+1
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
