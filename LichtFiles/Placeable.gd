@@ -51,7 +51,7 @@ func lazer_on(power, angle):
 	efct.set_emitting(true)
 	
 func lazer_off(power, angle):
-	print_debug("exit")
 	lp = 0
 	if efct:
 		efct.free()
+		efct = null

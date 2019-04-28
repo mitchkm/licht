@@ -12,4 +12,3 @@
 
 [node name="Licht" parent="Placement" instance=ExtResource( 3 )]
 position = Vector2( 96, 288 )
-
