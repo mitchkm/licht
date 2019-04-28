@@ -14,11 +14,10 @@ func _ready():
 func _process(delta):
 	update()
 	if(Input.is_mouse_button_pressed(1)):
-		clicked = true
 		placed = true
-	elif(!clicked):	
+	elif(!placed):	
 		self.position = get_global_mouse_position()
-		self.position.x = 64 + (128*(int(self.position.x)/128))
-		self.position.y = 64 + (128*(int(self.position.y)/128))
+		self.position.x = 32 + (64*(int(self.position.x)/64))
+		self.position.y = 32 + (64*(int(self.position.y)/64))
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
 		self.rotate(PI/2)

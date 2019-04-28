@@ -8,8 +8,8 @@ var placing = false
 func placePeice():
 	var placement = load("res://Placeable.tscn").instance()
 	placement.position = get_global_mouse_position()
-	placement.position.x = 64 + (128*(int(placement.position.x)/128))
-	placement.position.y = 64 + (128*(int(placement.position.y)/128))
+	placement.position.x = 32 + (64*(int(placement.position.x)/64))
+	placement.position.y = 32 + (64*(int(placement.position.y)/64))
 	add_child(placement)
 func _ready():
 	pass # Replace with function body.
