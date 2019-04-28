@@ -15,7 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Hanging_In_There"
+config/name="Licht"
+run/main_scene="res://GameScene.tscn"
 config/icon="res://icon.png"
 
 [input]
