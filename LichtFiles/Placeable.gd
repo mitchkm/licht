@@ -38,7 +38,7 @@ func _process(delta):
 		powerable.set_disabled(true)
 		
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
-		self.powerable.rotate(PI/2)	
+		self.powerable.rotate(PI/2)
 		currentText += 1
 		currentText = currentText%4
 		sprite.texture = textures[currentText]

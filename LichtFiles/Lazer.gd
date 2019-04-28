@@ -8,6 +8,9 @@ var la = 0
 var default_target
 var cur_collider
 
+func powered():
+	return self.lp > 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.default_target = self.cast_to - self.position
