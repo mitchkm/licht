@@ -15,3 +15,4 @@ texture = ExtResource( 2 )
 
 [node name="Powerable" parent="." instance=ExtResource( 3 )]
 disabled = true
+

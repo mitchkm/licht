@@ -1,4 +1,4 @@
-extends Sprite
+extends TileMap
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -6,9 +6,7 @@ extends Sprite
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#self.position.y = self.get_viewport().size.y/2# Replace with function body.
-	pass
-	
+	self.position = self.get_viewport().size/2 # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -17,12 +17,13 @@ _global_script_class_icons={
 
 config/name="Licht"
 run/main_scene="res://GameScene.tscn"
-config/icon="res://icon.png"
+config/icon="res://crown.png"
 
 [display]
 
 window/size/width=1280
 window/size/height=720
+mouse_cursor/custom_image="res://skelieHand.png"
 window/stretch/aspect="expand"
 
 [input]
