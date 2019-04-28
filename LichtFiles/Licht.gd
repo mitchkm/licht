@@ -9,7 +9,7 @@ var space
 func _ready():
 	self.position.y = self.get_viewport().size.y/2
 	skelies = 200
-	lazer.color = Color(0.8, 0.1, 0.8, 0.8) # purple
+	lazer.color = Color(0.1, 0.8, 0.3, 0.9) # green
 	lazer.lp = self.lp
 	
 
