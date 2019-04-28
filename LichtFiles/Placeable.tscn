@@ -1,23 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Placeable.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://normSkelieDL.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.8743, 31.7468 )
+extents = Vector2( 31.0682, 13.6695 )
 
 [node name="Placeable" type="KinematicBody2D"]
-rotation = 0.785398
-scale = Vector2( 0.5, 0.15 )
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 19.7741, -19.1077 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollideBox" type="CollisionShape2D" parent="."]
+rotation = 0.785398
 shape = SubResource( 1 )
 
