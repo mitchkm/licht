@@ -8,15 +8,17 @@ var placing = false
 func placePeice():
 	var placement = load("res://Placeable.tscn").instance()
 	placement.position = get_global_mouse_position()
+	placement.position.x = 64 + (128*(int(placement.position.x)/128))
+	placement.position.y = 64 + (128*(int(placement.position.y)/128))
 	add_child(placement)
 func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_mouse_button_pressed(2) && !placing):
-		if(self.find_node("Licht")):
-			var licht = self.find_node("Licht")
+	if(Input.is_action_just_pressed("mouse_right_click") && !placing):
+		if(self.find_node("LICHT")):
+			var licht = self.find_node("LICHT")
 			if(licht.skelies >= 10):
 				placePeice()
 				licht.skelies -= 10
@@ -25,5 +27,5 @@ func _process(delta):
 			placePeice()
 			placing = true;
 		
-	if(Input.is_mouse_button_pressed(1) && placing):
+	elif(Input.is_action_just_pressed("mouse_click") && placing):
 		placing = false
