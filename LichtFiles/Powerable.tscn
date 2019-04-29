@@ -3,10 +3,12 @@
 [ext_resource path="res://Powerable.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31.0682, 13.6695 )
+extents = Vector2( 27.072, 0.1 )
 
 [node name="Powerable" type="CollisionShape2D"]
+modulate = Color( 1, 0, 0, 1 )
 rotation = 0.785398
 shape = SubResource( 1 )
 disabled = true
 script = ExtResource( 1 )
+

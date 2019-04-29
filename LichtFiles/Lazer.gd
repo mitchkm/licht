@@ -14,6 +14,7 @@ func powered():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.default_target = self.cast_to - self.position
+	self.z_index = self.position.y+10
 
 func calc_cast_to():
 	self.cast_to = default_target.rotated(self.la)
@@ -27,18 +28,18 @@ func _physics_process(delta):
 	if self.is_colliding() and (not cur_collider or cur_collider.name != self.get_collider().name):
 		lazer_call(cur_collider, "lazer_off")
 		cur_collider = self.get_collider()
-		lazer_call(cur_collider, "lazer_on", self.get_collision_point())
+		lazer_call(cur_collider, "lazer_on", self.get_collision_point(), self.get_collision_normal())
 	elif not self.is_colliding():
 		lazer_call(cur_collider, "lazer_off")
 		cur_collider = null
 	draw_lzr()
 
-func lazer_call(collider, event, point = null):
+func lazer_call(collider, event, point = null, norm = null):
 	if not collider:
 		return
 	var powerable = collider.get_node("Powerable")
 	if powerable:
-		powerable.call(event, lp, la, color, point)
+		powerable.call(event, lp, la, color, point, norm)
 
 func draw_lzr():
 	drawLazer.width = lp

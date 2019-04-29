@@ -4,16 +4,16 @@ extends KinematicBody2D
 onready var lazer = get_node("Lazer")
 onready var powerable = get_node("Powerable")
 var lazer_effect = preload("res://lazer_end_effect.tscn")
-var clicked = false
-var timer = 0
 var efct
+var offset = Vector2(1280, 640)
 var placed = false
 var currentText = 0
 var textures =  \
 [load("res://normSkelieDL.png"),
- load("res://normSkelieUL.png"),
+ load("res://normSkelieDR.png"),
  load("res://normSkelieUR.png"),
- load("res://normSkelieDR.png")]
+ load("res://normSkelieUL.png"),
+ ]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.get_node("Sprite").texture = textures[currentText]
@@ -23,6 +23,7 @@ func _ready():
 	efct.scale *= 2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+#warning-ignore:unused_argument
 func _process(delta):
 	update()
 	var sprite = self.get_node("Sprite")
@@ -32,8 +33,11 @@ func _process(delta):
 	elif(!placed):	
 		var mouse_pos = get_parent().get_local_mouse_position()
 		self.position = mouse_pos
-		self.position.x = 128*((int(self.position.x))/128)
-		self.position.y = 64*(int(self.position.y)/64)
+#warning-ignore:integer_division
+		self.position.x = -offset.x + 128*(round((self.position.x + offset.x)/128))
+#warning-ignore:integer_division
+		self.position.y = -offset.y + 64*(round((self.position.y + offset.y)/64))
+#warning-ignore:narrowing_conversion
 		self.z_index = self.position.y+1
 		powerable.set_disabled(true)
 		
@@ -43,12 +47,13 @@ func _process(delta):
 		currentText = currentText%4
 		sprite.texture = textures[currentText]
 		
+#warning-ignore:unused_argument
 func _physics_process(delta):
 	if powerable.powered() and not lazer.enabled:
 		efct.position = self.to_local(powerable.collision_point)
 		efct.get_process_material().color = powerable.color + Color(0.05, 0, 0.05)
 		efct.set_emitting(true)
-		lazer.position = self.to_local(powerable.collision_point)
+		#lazer.position = self.to_local(powerable.collision_point)
 		var angle = powerable.la + PI/2 * get_flip()
 		lazer.la = angle
 		lazer.snap_angle()
@@ -63,7 +68,7 @@ func _physics_process(delta):
 		efct.set_emitting(false)
 	
 func get_flip():
-	if currentText == 1:
-		return -1
-	else:
+	if currentText%2 == 1:
 		return 1
+	else:
+		return -1
