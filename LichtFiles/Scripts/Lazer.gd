@@ -25,14 +25,19 @@ func snap_angle():
 
 func _physics_process(delta):
 	#update()
+	
+	#POTENTIAL CULRPIT FOR ISSUE #1
+	if cur_collider and not is_instance_valid(cur_collider):
+		cur_collider = null
 	if self.is_colliding() and (not cur_collider or cur_collider.name != self.get_collider().name):
 		lazer_call(cur_collider, "lazer_off")
 		cur_collider = self.get_collider()
 		lazer_call(cur_collider, "lazer_on", self.get_collision_point(), self.get_collision_normal())
-	elif not self.is_colliding():
+	elif cur_collider and not self.is_colliding():
 		lazer_call(cur_collider, "lazer_off")
 		cur_collider = null
 	draw_lzr()
+	#---------------------------------
 
 func lazer_call(collider, event, point = null, norm = null):
 	if not collider:

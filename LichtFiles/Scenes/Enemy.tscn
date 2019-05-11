@@ -5,10 +5,10 @@
 [ext_resource path="res://Scenes/Powerable.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11.9286, 24.8439 )
+extents = Vector2( 3.85667, 4.91682 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 7.86133 )
+extents = Vector2( 3.48862, 4.36474 )
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 4
@@ -20,11 +20,9 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Powerable" parent="." instance=ExtResource( 3 )]
-visible = false
 rotation = 0.0
 shape = SubResource( 2 )
 

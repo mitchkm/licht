@@ -4,6 +4,7 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 var speed = 20
+var health = 100;
 var efct
 var particles
 onready var powerable = get_node("Powerable")
@@ -19,6 +20,9 @@ func _ready():
 func _process(delta):
 	self.position.x -= speed*delta
 	self.z_index = self.position.y-1
+	if(health <= 0):
+		queue_free()
+		
 
 func _physics_process(delta):
 	if powerable.powered():
@@ -26,5 +30,6 @@ func _physics_process(delta):
 		efct.get_process_material().color = powerable.color + Color(0.05, 0, 0.05)
 		efct.set_emitting(true)
 		efct.global_position = self.global_position
+		health -= 1;
 	elif not powerable.powered():
 		efct.set_emitting(false)
