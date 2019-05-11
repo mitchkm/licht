@@ -6,7 +6,7 @@ extends Node2D
 var placing = false
 # Called when the node enters the scene tree for the first time.
 func placePeice():
-	var placement = load("res://Placeable.tscn").instance()
+	var placement = load("res://Scenes/Placeable.tscn").instance()
 	placement.position = get_local_mouse_position()
 	placement.position.x = 64 + (128*(int(placement.position.x)/128))
 	placement.position.y = 32 + (64*(int(placement.position.y)/64))

@@ -5,7 +5,6 @@
 [ext_resource path="res://Scenes/PlacementPlane.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/EnemySpawner.tscn" type="PackedScene" id=4]
 
-
 [node name="GameScene" type="Node2D"]
 
 [node name="Tiles" parent="." instance=ExtResource( 1 )]

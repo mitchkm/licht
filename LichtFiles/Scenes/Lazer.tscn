@@ -3,7 +3,6 @@
 [ext_resource path="res://Scripts/Lazer.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/DrawLazer.tscn" type="PackedScene" id=2]
 
-
 [node name="Lazer" type="RayCast2D"]
 enabled = true
 cast_to = Vector2( 1000, 0 )
