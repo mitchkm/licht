@@ -18,7 +18,7 @@ func _process(delta):
 	refresh += delta
 	if(refresh >= refreshRate):
 		var spot = (randi()%5)+1
-		var newEnemy = load("res://Enemy.tscn").instance()
+		var newEnemy = load("res://Scenes/Enemy.tscn").instance()
 		newEnemy.position = Vector2(1000, (spot*64)+topSpawn)
 		var scene = get_parent()
 		if(scene):

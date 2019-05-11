@@ -5,8 +5,6 @@
 [ext_resource path="res://Scenes/Lazer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Powerable.tscn" type="PackedScene" id=4]
 
-
-
 [node name="Placeable" type="KinematicBody2D"]
 collision_layer = 6
 collision_mask = 6

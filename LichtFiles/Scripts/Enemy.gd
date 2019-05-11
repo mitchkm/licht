@@ -7,7 +7,7 @@ var speed = 20
 var efct
 var particles
 onready var powerable = get_node("Powerable")
-var lazer_effect = preload("res://lazer_end_effect.tscn")
+var lazer_effect = preload("res://Scenes/lazer_end_effect.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	efct = lazer_effect.instance()

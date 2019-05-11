@@ -3,16 +3,16 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 onready var lazer = get_node("Lazer")
 onready var powerable = get_node("Powerable")
-var lazer_effect = preload("res://lazer_end_effect.tscn")
+var lazer_effect = preload("res://Scenes/lazer_end_effect.tscn")
 var efct
 var offset = Vector2(1280, 640)
 var placed = false
 var currentText = 0
 var textures =  \
-[load("res://normSkelieDL.png"),
- load("res://normSkelieDR.png"),
- load("res://normSkelieUR.png"),
- load("res://normSkelieUL.png")]
+[load("res://Sprites/normSkelieDL.png"),
+ load("res://Sprites/normSkelieDR.png"),
+ load("res://Sprites/normSkelieUR.png"),
+ load("res://Sprites/normSkelieUL.png")]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.get_node("Sprite").texture = textures[currentText]
