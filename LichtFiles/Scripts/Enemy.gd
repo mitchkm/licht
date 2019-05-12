@@ -7,6 +7,7 @@ var speed = 20
 var health = 800;
 var efct
 var particles
+signal enemyKilled
 onready var powerable = get_node("Powerable")
 var lazer_effect = preload("res://Scenes/lazer_end_effect.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +22,7 @@ func _process(delta):
 	self.position.x -= speed*delta
 	self.z_index = self.position.y-1
 	if(health <= 0):
-		queue_free()
+		die()
 		
 
 func _physics_process(delta):
@@ -31,6 +32,9 @@ func _physics_process(delta):
 		efct.set_emitting(true)
 		efct.global_position = self.global_position
 		health -= powerable.lp;
-		print_debug(health)
 	elif not powerable.powered():
 		efct.set_emitting(false)
+		
+func die():
+	emit_signal("enemyKilled")
+	queue_free()

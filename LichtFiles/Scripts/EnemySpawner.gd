@@ -7,6 +7,8 @@ var refresh = 0
 var refreshRate = 4
 var middle 
 var topSpawn
+onready var licht = get_parent().get_node("Licht")
+signal enemyKilled
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	middle = self.get_viewport().size.y/2
@@ -23,6 +25,6 @@ func _process(delta):
 		var scene = get_parent()
 		if(scene):
 			scene.add_child(newEnemy)
+			newEnemy.connect("enemyKilled", licht, "addSkelies")
 		refresh = 0
 		
-	

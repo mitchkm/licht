@@ -4,6 +4,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 var placing = false
+onready var licht = get_parent().get_node("Licht")
 # Called when the node enters the scene tree for the first time.
 func placePeice():
 	var placement = load("res://Scenes/Placeable.tscn").instance()
@@ -19,8 +20,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(Input.is_action_just_pressed("mouse_right_click") && !placing):
-		if(self.find_node("LICHT")):
-			var licht = self.find_node("LICHT")
+		if(licht):
 			if(licht.skelies >= 10):
 				placePeice()
 				licht.skelies -= 10

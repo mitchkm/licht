@@ -32,14 +32,12 @@ func _process(delta):
 	elif(!placed):	
 		var mouse_pos = get_parent().get_local_mouse_position()
 		self.position = mouse_pos
-#warning-ignore:integer_division
 		self.position.x = -offset.x + 128*(round((self.position.x + offset.x)/128))
-#warning-ignore:integer_division
 		self.position.y = -offset.y + 64*(round((self.position.y + offset.y)/64))
-#warning-ignore:narrowing_conversion
 		self.z_index = self.position.y+1
 		powerable.set_disabled(true)
-		
+	
+	#SUSPECT FOR ISSUE #3
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
 		self.powerable.rotate(PI/2)
 		currentText += 1
