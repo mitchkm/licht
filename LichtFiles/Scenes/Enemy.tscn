@@ -20,9 +20,10 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Powerable" parent="." instance=ExtResource( 3 )]
-rotation = 0.0
+visible = false
 shape = SubResource( 2 )
 

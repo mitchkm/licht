@@ -39,7 +39,6 @@ func _process(delta):
 	
 	#SUSPECT FOR ISSUE #3
 	if(Input.is_action_just_pressed("mouse_middle_click") && !placed):
-		self.powerable.rotate(PI/2)
 		currentText += 1
 		currentText = currentText%4
 		sprite.texture = textures[currentText]
@@ -51,21 +50,30 @@ func _physics_process(delta):
 		efct.get_process_material().color = powerable.color + Color(0.05, 0, 0.05)
 		efct.set_emitting(true)
 		#lazer.position = self.to_local(powerable.collision_point)
-		var angle = powerable.la + PI/2 * get_flip()
-		lazer.la = angle
-		lazer.snap_angle()
-		lazer.lp = powerable.lp
-		lazer.color = powerable.color
-		lazer.calc_cast_to()
-		lazer.enabled = true
-		lazer.get_node("DrawLazer").visible = true
+		var angle = get_reflect_angle(currentText, int(round(rad2deg(powerable.la))))
+		if(angle > -1):
+			angle = (int(floor(angle / 45)) * 45) % 360
+			lazer.la = deg2rad(angle)
+			lazer.lp = powerable.lp
+			lazer.color = powerable.color
+			lazer.calc_cast_to()
+			lazer.enabled = true
+			lazer.get_node("DrawLazer").visible = true
+		else:
+			pass #Damage to skelie boy go here
 	elif not powerable.powered():
 		lazer.enabled = false
 		lazer.get_node("DrawLazer").visible = false
 		efct.set_emitting(false)
 	
-func get_flip():
-	if currentText%2 == 1:
-		return 1
-	else:
+func get_reflect_angle(state, angle):
+	print_debug(angle)
+	var lookup = {
+		0 : {0 : 90, 270 : 180},
+		1 : {270 : 0, 180 : 90},
+		2 : {180 : 270, 90 : 0},
+		3 : {0 : 270, 90 : 180}
+	}
+	if not lookup[state].has(angle):
 		return -1
+	return lookup[state][angle] % 360
