@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Placeable.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/normSkelieUR.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Lazer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Powerable.tscn" type="PackedScene" id=4]
+
+[node name="Placeable" type="KinematicBody2D"]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Lazer" parent="." instance=ExtResource( 3 )]
+enabled = false
+
+[node name="Powerable" parent="." instance=ExtResource( 4 )]
+rotation = -0.785398
+
