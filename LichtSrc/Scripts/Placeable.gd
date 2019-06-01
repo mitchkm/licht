@@ -67,7 +67,6 @@ func _physics_process(delta):
 		efct.set_emitting(false)
 	
 func get_reflect_angle(state, angle):
-	print_debug(angle)
 	var lookup = {
 		0 : {0 : 90, 270 : 180},
 		1 : {270 : 0, 180 : 90},

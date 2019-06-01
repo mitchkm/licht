@@ -27,4 +27,3 @@ position = Vector2( 96, 288 )
 
 [node name="EnemySpawner" parent="." instance=ExtResource( 5 )]
 visible = false
-
