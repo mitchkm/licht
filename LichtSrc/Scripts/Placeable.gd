@@ -46,16 +46,17 @@ func _process(delta):
 #warning-ignore:unused_argument
 func _physics_process(delta):
 	if powerable.powered() and not lazer.enabled:
-		efct.position = self.to_local(powerable.collision_point)
-		efct.get_process_material().color = powerable.color + Color(0.05, 0, 0.05)
+		var pwr = powerable.get_p_data(0)
+		efct.position = self.to_local(pwr.collision_point)
+		efct.get_process_material().color = pwr.color + Color(0.05, 0, 0.05)
 		efct.set_emitting(true)
-		#lazer.position = self.to_local(powerable.collision_point)
-		var angle = get_reflect_angle(currentText, int(round(rad2deg(powerable.la))))
+		#lazer.position = self.to_local(pwr.collision_point)
+		var angle = get_reflect_angle(currentText, int(round(rad2deg(pwr.la))))
 		if(angle > -1):
 			angle = (int(floor(angle / 45)) * 45) % 360
 			lazer.la = deg2rad(angle)
-			lazer.lp = powerable.lp
-			lazer.color = powerable.color
+			lazer.lp = pwr.lp
+			lazer.color = pwr.color
 			lazer.calc_cast_to()
 			lazer.enabled = true
 			lazer.get_node("DrawLazer").visible = true

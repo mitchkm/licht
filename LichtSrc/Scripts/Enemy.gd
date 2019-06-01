@@ -27,11 +27,12 @@ func _process(delta):
 
 func _physics_process(delta):
 	if powerable.powered():
-		efct.position = self.to_local(powerable.collision_point)
-		efct.get_process_material().color = powerable.color + Color(0.05, 0, 0.05)
+		var pwr = powerable.get_p_data(0)
+		efct.position = self.to_local(pwr.collision_point)
+		efct.get_process_material().color = pwr.color + Color(0.05, 0, 0.05)
 		efct.set_emitting(true)
 		efct.global_position = self.global_position
-		health -= powerable.lp;
+		health -= pwr.lp;
 	elif not powerable.powered():
 		efct.set_emitting(false)
 		

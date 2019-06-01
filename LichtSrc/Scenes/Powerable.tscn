@@ -11,4 +11,3 @@ modulate = Color( 1, 0, 0, 1 )
 shape = SubResource( 1 )
 disabled = true
 script = ExtResource( 1 )
-
