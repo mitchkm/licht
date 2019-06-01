@@ -9,8 +9,8 @@ onready var licht = get_parent().get_node("Licht")
 func placePeice():
 	var placement = load("res://Scenes/Placeable.tscn").instance()
 	placement.position = get_local_mouse_position()
-	placement.position.x = 64 + (128*(int(placement.position.x)/128))
-	placement.position.y = 32 + (64*(int(placement.position.y)/64))
+	placement.position.x = -64 + (128*(int(placement.position.x)/128))
+	placement.position.y = -32 + (64*(int(placement.position.y)/64))
 	add_child(placement)
 func _ready():
 	self.position = self.get_viewport().size/float(2)
